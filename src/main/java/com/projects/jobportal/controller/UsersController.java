@@ -36,7 +36,6 @@ public class UsersController {
             model.addAttribute("user", new Users());
             return "register";
         } catch (Exception e) {
-            // Log the exception using a logger instead of printing the stack trace
             LoggerFactory.getLogger(UsersController.class).error("Error occurred while fetching user types: {}", e.getMessage(), e);
             model.addAttribute("error", "Internal Server Error. Please try again later");
             return "error";
@@ -45,7 +44,7 @@ public class UsersController {
 
     @PostMapping("/register/new")
     public String userRegistration(@Valid Users users, Model model) throws InterruptedException {
-        Optional<Users> registeredUsers = usersService.getUsersByEmail(users.getEmail());
+        Optional<Users> registeredUsers = usersService.getUserByEmail(users.getEmail());
         if (registeredUsers.isPresent()) {
             model.addAttribute("error", "Internal Server Error. Please try again later");
             return register(model);
@@ -58,6 +57,6 @@ public class UsersController {
             return "error";
         }
 
-        return "dashboard";
+        return "redirect:/dashboard/";
     }
 }
