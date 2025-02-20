@@ -9,26 +9,28 @@ import java.util.List;
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userTypeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userTypeId;
 
     private String userTypeName;
 
     @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
 
-    public UsersType() {}
-
-    public UsersType(String userTypeId, String userTypeName) {
-        this.userTypeId = userTypeId;
-        this.userTypeName = userTypeName;
+    public UsersType() {
     }
 
-    public String getUserTypeId() {
+    public UsersType(int userTypeId, String userTypeName, List<Users> users) {
+        this.userTypeId = userTypeId;
+        this.userTypeName = userTypeName;
+        this.users = users;
+    }
+
+    public int getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUserTypeId(String userTypeId) {
+    public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
 
@@ -51,7 +53,7 @@ public class UsersType {
     @Override
     public String toString() {
         return "UsersType{" +
-                "userTypeId='" + userTypeId + '\'' +
+                "userTypeId=" + userTypeId +
                 ", userTypeName='" + userTypeName + '\'' +
                 '}';
     }

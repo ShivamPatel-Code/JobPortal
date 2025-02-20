@@ -11,7 +11,7 @@ import java.util.Date;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column(unique = true)
@@ -22,7 +22,7 @@ public class Users {
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -81,11 +81,11 @@ public class Users {
         this.registrationDate = registrationDate;
     }
 
-    public UsersType getUsersTypeId() {
+    public UsersType getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUsersTypeId(UsersType userTypeId) {
+    public void setUserTypeId(UsersType userTypeId) {
         this.userTypeId = userTypeId;
     }
 
@@ -101,4 +101,3 @@ public class Users {
                 '}';
     }
 }
-
